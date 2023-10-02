@@ -25,6 +25,7 @@ protected:
 	UCameraComponent* CameraComp;
 	
 	void MoveForward(float value);
+	void MoveRight(float value);
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
