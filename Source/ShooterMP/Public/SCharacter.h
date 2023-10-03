@@ -1,11 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "SCharacter.generated.h"
 
+class UCameraComponent;
+class USpringArmComponent;
 
 UCLASS()
 class SHOOTERMP_API ASCharacter : public ACharacter
@@ -18,6 +18,11 @@ public:
 
 protected:
 
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	TSubclassOf<AActor> ProjectileClass;
+
+protected:
+
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmComp;
 
@@ -26,6 +31,8 @@ protected:
 	
 	void MoveForward(float value);
 	void MoveRight(float value);
+
+	void PrimaryAttack();
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

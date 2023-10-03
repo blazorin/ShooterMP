@@ -1,7 +1,9 @@
 
 #include "SCharacter.h"
 
+#include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -41,6 +43,19 @@ void ASCharacter::MoveRight(float value)
 	AddMovementInput(RightVector, value);
 }
 
+void ASCharacter::PrimaryAttack()
+{
+	// Get hand muzzle location
+	const FVector HandLocation = GetMesh()->GetSocketLocation("Muzzle_01");
+	
+	const FTransform SpawnTF = FTransform(GetControlRotation(), HandLocation);
+
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnTF, SpawnParams);
+}
+
 // Called when the game starts or when spawned
 void ASCharacter::BeginPlay()
 {
@@ -65,5 +80,11 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput); // Mouse X (Y)
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput); // Mouse Y (X)
+
+	// Actions
+	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
+	
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
+	
 }
 
