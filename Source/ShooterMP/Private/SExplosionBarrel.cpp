@@ -29,7 +29,7 @@ ASExplosionBarrel::ASExplosionBarrel()
 	BarrelForceComp->SetAutoActivate(false);
 	
 	BarrelForceComp->Radius = 750.0f;
-	BarrelForceComp->ImpulseStrength = 1200.0f;
+	BarrelForceComp->ImpulseStrength = 1800.0f;
 	
 	// Optional, ignores 'Mass' of other objects
 	BarrelForceComp->bImpulseVelChange = true;

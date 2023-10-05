@@ -24,10 +24,10 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* SceneComp;
 
-	UPROPERTY(EditAnywhere, Category = "Barrel")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Barrel")
 	UStaticMeshComponent* BarrelComp;
 
-	UPROPERTY(VisibleAnywhere, Category = "Explosion")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Explosion")
 	URadialForceComponent* BarrelForceComp;
 
 
