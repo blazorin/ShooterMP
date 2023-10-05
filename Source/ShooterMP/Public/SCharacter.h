@@ -20,8 +20,11 @@ public:
 
 protected:
 
-	UPROPERTY(EditAnywhere, Category = "Effects")
+	UPROPERTY(EditAnywhere, Category = "Attack")
 	TSubclassOf<AActor> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	UAnimMontage* PrimaryAttackAnim;
 
 protected:
 
@@ -33,12 +36,17 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	USInteractionComponent* InteractionComp;
+
+	
+	FTimerHandle PrimaryAttackTimerHandle;
 	
 	void MoveForward(float value);
 	void MoveRight(float value);
 
 	void PrimaryAttack();
 	void PrimaryInteraction();
+
+	void PrimaryAttack_Timer();
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -43,6 +43,13 @@ void ASCharacter::Tick(float DeltaTime)
 
 void ASCharacter::PrimaryAttack()
 {
+	PlayAnimMontage(PrimaryAttackAnim);
+
+	GetWorld()->GetTimerManager().SetTimer(PrimaryAttackTimerHandle, this, &ASCharacter::PrimaryAttack_Timer, 0.2f);
+}
+
+void ASCharacter::PrimaryAttack_Timer()
+{
 	// Get hand muzzle location
 	const FVector HandLocation = GetMesh()->GetSocketLocation("Muzzle_01");
 	
@@ -59,10 +66,12 @@ void ASCharacter::PrimaryAttack()
 	//UE_LOG(LogTemp, Warning, TEXT("Actor's Right Vector: X = %f, Y = %f, Z = %f"), RightVector.X, RightVector.Y, RightVector.Z);
 }
 
+
 void ASCharacter::PrimaryInteraction()
 {
 	InteractionComp->PrimaryInteraction();
 }
+
 
 
 // Called to bind functionality to input
