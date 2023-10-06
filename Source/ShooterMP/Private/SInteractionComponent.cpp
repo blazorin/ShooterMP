@@ -40,6 +40,7 @@ void USInteractionComponent::PrimaryInteraction()
 	
 	FCollisionObjectQueryParams CollisionQuery;
 	CollisionQuery.AddObjectTypesToQuery(ECC_WorldDynamic);
+	CollisionQuery.AddObjectTypesToQuery(ECC_WorldStatic);
 	
 	//FHitResult HitResult;
 	//GetWorld()->LineTraceSingleByObjectType(HitResult, EyeLocation, EndLocation, CollisionQuery);
@@ -59,7 +60,7 @@ void USInteractionComponent::PrimaryInteraction()
 		if (AActor* HitActor = HitResult.GetActor())
 		{
 			if (!HitActor->Implements<USGameplayInterface>())
-				continue;
+				break;
 		
 			ISGameplayInterface::Execute_Interact(HitActor, Cast<APawn>(OwnerActor));
 		}

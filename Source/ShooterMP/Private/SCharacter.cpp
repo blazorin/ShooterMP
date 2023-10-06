@@ -44,6 +44,7 @@ void ASCharacter::Tick(float DeltaTime)
 void ASCharacter::PrimaryAttack()
 {
 	PlayAnimMontage(PrimaryAttackAnim);
+	SetActorRotation(FRotator(0, GetControlRotation().Yaw, 0)); // Good workaround
 
 	GetWorld()->GetTimerManager().SetTimer(PrimaryAttackTimerHandle, this, &ASCharacter::PrimaryAttack_Timer, 0.2f);
 }
@@ -52,7 +53,6 @@ void ASCharacter::PrimaryAttack_Timer()
 {
 	// Get hand muzzle location
 	const FVector HandLocation = GetMesh()->GetSocketLocation("Muzzle_01");
-	
 	const FTransform SpawnTF = FTransform(GetControlRotation(), HandLocation);
 
 	FActorSpawnParameters SpawnParams;
